@@ -1,0 +1,93 @@
+*{
+    padding: 0px;
+    box-sizing: border-box;
+    margin: 0px;
+}
+
+#wrapper{
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.container{
+    height: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1{
+    margin: 20px 0;
+    text-align: center;
+    font-size: 3rem;
+}
+
+.gallery{
+    /* Implementation using grid */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    row-gap: 10px;
+    column-gap: 20px;
+}
+
+.card{
+    /* 32% is used to place only 3 images with equal spacing between them in one row */
+    /* width: 32%; -> Used when flexbox is used */  
+    /* card ki position relative isliye mark kri hai becz caption ko image m overlap krwana h*/
+    /* For overlapping, absolute positioning is used, and absolute positioning k liye parent ko non static mark krna hota h jiske respective overlap krwana h content. */
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.card img{
+    /* Width of image becomes equal to that of it's parent i.e "card" */
+    width: 100%;
+    /* To apply greyscale filter */
+    filter: grayscale(100%);
+    /* Image ki height becomes equal to that of it's parent i.e "card", uske rounded corners bhi include ho jayenge */
+    height: 100%;
+    /* Image will adjust itself in the provided space, no enlarged image will be produced */
+    object-fit: cover;
+}
+
+.card:hover{
+    /* To enlarge the image when hovered */
+    transform: scale(1.03);
+    /* Shodaow lgane k liye */
+    filter: drop-shadow(0 0 10px #333);
+    /* Smooth transition k liye */
+    transition: 0.3s;
+}
+
+.card:hover img{
+    filter: grayscale(0%);
+}
+
+.card figcaption{
+    /* To overlap caption on image */
+    position: absolute;
+    color: #fff;
+    bottom: 0;
+    left: 0;
+    padding: 25px;
+    /* width = 100% of parent size i.e card size */
+    width: 100%;
+    height: 20%;
+    font-size: 16px;
+    font-weight: 500;
+    /* Invisible text */
+    opacity: 0;
+    border-radius: 0 0 10px 10px;
+    /* To apply gradient effect in bootom of image when hovered */
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.card:hover figcaption{
+    opacity: 1;
+    transform: scale(1.03); 
+    transition: 0.3s;
+}
